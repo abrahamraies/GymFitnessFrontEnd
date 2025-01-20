@@ -1,18 +1,32 @@
-import { BrowserRouter as Router, Routes } from 'react-router-dom';
-// import Home from "../features/Home/Home";
-// import Test from "../features/Test/Test";
-// import Dashboard from "../features/Dashboard/Dashboard";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MainLayout from "../components/layouts/MainLayout";
+import AboutPage from "../pages/about/AboutPage";
+import HomePage from "../pages/Home/HomePage";
 
-function AppRoutes() {
-  return (
-    <Router>
-      <Routes>
-        {/* <Route path="/" element={<Home />} />
-        <Route path="/test" element={<Test />} />
-        <Route path="/dashboard" element={<Dashboard />} /> */}
+const AppRoutes: React.FC = () => {
+    return (
+      <Router>
+        <Routes>
+        <Route
+          path="/"
+          element={
+            <MainLayout>
+              <HomePage />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <MainLayout>
+              <AboutPage />
+            </MainLayout>
+          }
+        />
       </Routes>
-    </Router>
-  );
-}
-
-export default AppRoutes;
+      </Router>
+    );
+  };
+  
+  export default AppRoutes;
