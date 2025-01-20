@@ -1,0 +1,15 @@
+{
+    "welcome": "Bienvenido a Gym & Fitness Guide",
+    "description": "Tu guía definitiva para alcanzar tus objetivos de fitness.",
+    "features": "Características",
+    "featureList": [
+      "Recomendaciones de entrenamiento personalizadas",
+      "Acceso a recursos y guías de fitness",
+      "Herramientas para seguir tu progreso",
+      "Soporte de la comunidad"
+    ],
+    "howItWorks": "Cómo Funciona",
+    "instructions": "Haz una prueba rápida para descubrir el mejor plan de entrenamiento para ti. Ya sea que prefieras entrenar en el gimnasio, en casa o explorar yoga y meditación, tenemos todo lo que necesitas.",
+    "changeLanguage": "Cambiar a Inglés"
+  }
+  

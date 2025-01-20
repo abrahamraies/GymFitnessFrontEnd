@@ -1,0 +1,15 @@
+{
+    "welcome": "Welcome to Gym & Fitness Guide",
+    "description": "Your ultimate guide to achieving your fitness goals.",
+    "features": "Features",
+    "featureList": [
+      "Personalized workout recommendations",
+      "Access to fitness resources and guides",
+      "Tools to track your progress",
+      "Community support"
+    ],
+    "howItWorks": "How it Works",
+    "instructions": "Take a quick fitness test to discover the best workout plan for you. Whether you prefer working out at the gym, at home, or exploring yoga and meditation, we have everything you need.",
+    "changeLanguage": "Change to Spanish"
+  }
+  
