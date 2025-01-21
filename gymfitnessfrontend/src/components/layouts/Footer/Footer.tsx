@@ -1,15 +1,9 @@
 import React from 'react';
+import styles from './Footer.module.css';
 
 const Footer: React.FC = () => {
   return (
-    <footer
-      style={{
-        padding: '1rem 2rem',
-        backgroundColor: '#282c34',
-        color: 'white',
-        textAlign: 'center',
-      }}
-    >
+    <footer className={styles.footer}>
       <p>© 2025 Gym & Fitness Guide. All rights reserved.</p>
     </footer>
   );

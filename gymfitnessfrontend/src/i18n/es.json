@@ -1,4 +1,11 @@
 {
+  "navbar": {
+    "home": "Inicio",
+    "about": "Sobre",
+    "contact": "Contacto",
+    "changeLanguage": "Cambiar a Inglés"
+  },
+  "home": {
     "welcome": "Bienvenido a Gym & Fitness Guide",
     "description": "Tu guía definitiva para alcanzar tus objetivos de fitness.",
     "features": "Características",
@@ -9,7 +16,20 @@
       "Soporte de la comunidad"
     ],
     "howItWorks": "Cómo Funciona",
-    "instructions": "Haz una prueba rápida para descubrir el mejor plan de entrenamiento para ti. Ya sea que prefieras entrenar en el gimnasio, en casa o explorar yoga y meditación, tenemos todo lo que necesitas.",
-    "changeLanguage": "Cambiar a Inglés"
+    "instructions": "Haz una prueba rápida para descubrir el mejor plan de entrenamiento para ti. Ya sea que prefieras entrenar en el gimnasio, en casa o explorar yoga y meditación, tenemos todo lo que necesitas."
+  },
+  "about": {
+    "header": "Acerca de Gym & Fitness Guide",
+    "intro": "Bienvenido a <strong>Gym & Fitness Guide</strong>, tu herramienta definitiva para descubrir y personalizar tu viaje de fitness. Ya sea que busques entrenar en el gimnasio, en casa o explorar nuevas disciplinas como yoga y pilates, estamos aquí para guiarte.",
+    "mission": "Nuestra misión es ayudar a todos a encontrar su forma ideal de mantenerse activos y saludables, ofreciendo recomendaciones personalizadas, recursos y herramientas adaptadas a tus preferencias y objetivos.",
+    "whyChooseUs": "¿Por qué elegirnos?",
+    "features": [
+      "🌟 Planes de entrenamiento personalizados para todos los niveles.",
+      "💪 Acceso a los mejores recursos, incluidos canales de YouTube y aplicaciones.",
+      "🧘‍♂️ Opciones para entrenar en el gimnasio, en casa, yoga, pilates, meditación y más.",
+      "📊 Herramientas para rastrear tu progreso y tu viaje fitness."
+    ],
+    "getInTouchHeader": "Contáctanos",
+    "getInTouchMessage": "¿Tienes preguntas o comentarios? No dudes en comunicarte. ¡Nos encantaría saber de ti!"
   }
-  
+}

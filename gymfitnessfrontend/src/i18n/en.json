@@ -1,4 +1,11 @@
 {
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "changeLanguage": "Change to Spanish"
+  },
+  "home": {
     "welcome": "Welcome to Gym & Fitness Guide",
     "description": "Your ultimate guide to achieving your fitness goals.",
     "features": "Features",
@@ -11,5 +18,19 @@
     "howItWorks": "How it Works",
     "instructions": "Take a quick fitness test to discover the best workout plan for you. Whether you prefer working out at the gym, at home, or exploring yoga and meditation, we have everything you need.",
     "changeLanguage": "Change to Spanish"
+  },
+  "about": {
+    "header": "About Gym & Fitness Guide",
+    "intro": "Welcome to <strong>Gym & Fitness Guide</strong>, your ultimate tool for discovering and customizing your fitness journey. Whether you're looking to train at the gym, at home, or explore new disciplines like yoga and pilates, we're here to guide you.",
+    "mission": "Our mission is to help everyone find their perfect way to stay active and healthy by offering personalized recommendations, resources, and tools tailored to your preferences and goals.",
+    "whyChooseUs": "Why Choose Us?",
+    "features": [
+      "🌟 Customized training plans for all levels.",
+      "💪 Access to top resources, including YouTube channels and apps.",
+      "🧘‍♂️ Options for gym training, home workouts, yoga, pilates, meditation, and more.",
+      "📊 Tools to track your fitness journey and progress."
+    ],
+    "getInTouchHeader": "Get in Touch",
+    "getInTouchMessage": "Have questions or feedback? Feel free to reach out. We'd love to hear from you!"
   }
-  
+}
