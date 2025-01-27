@@ -9,8 +9,18 @@ const HomePage: React.FC = () => {
         <main className={styles.container}> 
           <header className={styles.header}>
             <h1>{t("home.welcome")}</h1>
-            <p>{t("home.description")}</p>
+            <p className={styles.subtitle}>{t("home.description")}</p>
           </header>
+
+          <section className={styles.howItWorksSection}>
+            <h2>{t("home.howItWorks")}</h2>
+            <p>{t("home.instructions")}</p>
+            <div className={styles.buttonContainer}>
+            <button className={styles.startTestButton}>
+              {t("home.startTest")}
+            </button>
+          </div>
+          </section>
     
           <section className={styles.featureSection}>
             <h2>{t("home.features")}</h2>
@@ -20,11 +30,7 @@ const HomePage: React.FC = () => {
               ))}
             </ul>
           </section>
-    
-          <section className={styles.howItWorksSection}>
-            <h2>{t("home.howItWorks")}</h2>
-            <p>{t("home.instructions")}</p>
-          </section>
+
         </main>
       );
     };

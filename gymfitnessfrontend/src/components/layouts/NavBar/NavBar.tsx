@@ -12,7 +12,8 @@ const NavBar: React.FC = () => {
   };
 
   return (
-    <nav className={styles.nav}>
+    <nav className={styles.navbar}> 
+    {/* //hacer que sea fijo para todas las paginas. */}
       <h1 className={styles.logo}>Gym & Fitness Guide</h1>
       <ul className={styles.navLinks}>
         <li>
@@ -32,8 +33,9 @@ const NavBar: React.FC = () => {
         </li>
         <li>
           <button onClick={toggleLanguage} className={styles.languageButton}>
-            {t("changeLanguage")}
-          </button>
+            {t("navbar.changeLanguage")}
+          </button> 
+          {/* //quitar el borde al apretarlo. */}
         </li>
       </ul>
     </nav>

@@ -7,7 +7,7 @@
   },
   "home": {
     "welcome": "Bienvenido a Gym & Fitness Guide",
-    "description": "Tu guía definitiva para alcanzar tus objetivos de fitness.",
+    "description": "Descubre tu ruta de entrenamiento físico ideal: yoga, gimnasio, entrenamientos en casa, pilates y más.",
     "features": "Características",
     "featureList": [
       "Recomendaciones de entrenamiento personalizadas",
@@ -16,7 +16,8 @@
       "Soporte de la comunidad"
     ],
     "howItWorks": "Cómo Funciona",
-    "instructions": "Haz una prueba rápida para descubrir el mejor plan de entrenamiento para ti. Ya sea que prefieras entrenar en el gimnasio, en casa o explorar yoga y meditación, tenemos todo lo que necesitas."
+    "instructions": "Haz una prueba rápida para descubrir el mejor plan de entrenamiento para ti. Ya sea que prefieras entrenar en el gimnasio, en casa o explorar yoga y meditación, tenemos todo lo que necesitas.",
+    "startTest": "Comenzar Prueba"
   },
   "about": {
     "header": "Acerca de Gym & Fitness Guide",
@@ -31,5 +32,11 @@
     ],
     "getInTouchHeader": "Contáctanos",
     "getInTouchMessage": "¿Tienes preguntas o comentarios? No dudes en comunicarte. ¡Nos encantaría saber de ti!"
+  },
+  "test":{
+    "welcome": "Bienvenido al Fitness Test",
+    "description": "Encontra tu entrenamiento de fitness ideal basado en tus preferencias.",
+    "startTest": "Iniciar Test",
+    "knowProfile": "Ya conozco mi perfil"
   }
 }

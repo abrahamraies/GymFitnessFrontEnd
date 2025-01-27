@@ -7,7 +7,7 @@
   },
   "home": {
     "welcome": "Welcome to Gym & Fitness Guide",
-    "description": "Your ultimate guide to achieving your fitness goals.",
+    "description": "Discover your ideal fitness path—yoga, gym, home workouts, pilates, and more!",
     "features": "Features",
     "featureList": [
       "Personalized workout recommendations",
@@ -17,7 +17,7 @@
     ],
     "howItWorks": "How it Works",
     "instructions": "Take a quick fitness test to discover the best workout plan for you. Whether you prefer working out at the gym, at home, or exploring yoga and meditation, we have everything you need.",
-    "changeLanguage": "Change to Spanish"
+    "startTest": "Start Test"
   },
   "about": {
     "header": "About Gym & Fitness Guide",
@@ -32,5 +32,11 @@
     ],
     "getInTouchHeader": "Get in Touch",
     "getInTouchMessage": "Have questions or feedback? Feel free to reach out. We'd love to hear from you!"
+  },
+  "test":{
+    "welcome": "Welcome to the Fitness Test",
+    "description": "Find your ideal fitness journey based on your preferences.",
+    "startTest": "Start Test",
+    "knowProfile": "I already know my profile"
   }
 }
