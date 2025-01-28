@@ -1,7 +1,7 @@
 export interface TestAnswer {
     id?: number;
     answer?: boolean;
-    [questionId: number]: string;
+    questionId: number;
     selectedOptionId?: number;
     userId: number;
   }

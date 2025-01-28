@@ -4,6 +4,7 @@ import { User } from "../../interfaces/UserInterface";
 import { Question } from "../../interfaces/QuestionInterface";
 import { TestAnswer } from "../../interfaces/AnswerInterface";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const TestComponent = () => {
   const [step, setStep] = useState<number>(0);
@@ -12,6 +13,7 @@ const TestComponent = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [answers, setAnswers] = useState<TestAnswer>({} as TestAnswer);
   const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -26,11 +28,7 @@ const TestComponent = () => {
     setLoading(true);
 
     try {
-      const userResponse = await axios.post("/api/user/getorcreate", {
-        name: userInfo.name,
-        email: userInfo.email,
-      });
-
+      const userResponse = await axios.post("/api/user/getorcreate", userInfo);
       const UserId = userResponse.data;
       
       if (!UserId) {
@@ -50,24 +48,29 @@ const TestComponent = () => {
     }
   };
 
-  const sendAnswerToBackend = async (questionId: number, answer: string) => {
+  const sendAnswerToBackend = async (answer: TestAnswer) => {
     try {
-      await axios.post("/api/TestAnswer", {
-        userId: userInfo.id,
-        questionId,
-        answer,
-      });
+      await axios.post("/api/TestAnswer", answer);
+      goToNextQuestion();
     } catch (error) {
       console.error("Error al enviar la respuesta:", error);
     }
   };
 
-  const handleAnswer = (questionId: number, answer: string) => {
-    setAnswers((prev) => {
-      const updatedAnswers = { ...prev, [questionId]: answer };
-      sendAnswerToBackend(questionId, answer);
-      return updatedAnswers;
-    });
+  const handleAnswer = (questionId: number, selectedOptionId?: number, answerValue?: boolean) => {
+    const answer: TestAnswer = {
+      userId: userInfo.id!,
+      questionId,
+      selectedOptionId: selectedOptionId || undefined,
+      answer: answerValue ?? undefined,
+    };
+
+    setAnswers((prev) => ({
+      ...prev,
+      [questionId]: answer,
+    }));
+
+    sendAnswerToBackend(answer);
   };
 
   const goToNextQuestion = () => {
@@ -85,8 +88,12 @@ const TestComponent = () => {
   const submitTest = async () => {
     setLoading(true);
     try {
-      await axios.post("/api/TestAnswer/{userInfo}/process", answers );
+      const response = await axios.post(`/api/TestAnswer/${userInfo.id}/process`);
       setStep(2);
+
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      navigate(`/recommendations/${response.data[0].categoryId}`);
+
     } catch (error) {
       console.error("Error al enviar el test:", error);
       alert("Hubo un problema al enviar el test.");
@@ -135,40 +142,45 @@ const TestComponent = () => {
               {questions[currentQuestionIndex].question}
             </p>
             {questions[currentQuestionIndex].options?.length ? (
-              questions[currentQuestionIndex].options.map((option) => (
+              <div className={styles.options}>
+              {questions[currentQuestionIndex].options.map((option) => (
                 <button
                   key={option.id}
                   onClick={() =>
-                    handleAnswer(questions[currentQuestionIndex].id, option.text)
+                    handleAnswer(questions[currentQuestionIndex].id, option.id)
                   }
                   className={`${styles.option} ${
-                    answers[questions[currentQuestionIndex].id] === option.text &&
-                    styles.optionSelected
+                    answers.selectedOptionId === option.id
+                  } ${
+                    currentQuestionIndex === 9 ? styles.optionSelected : ""
                   }`}
                 >
                   {option.text}
                 </button>
-              ))
+              ))}
+              </div>
             ) : (
-              <div>
+              <div className={styles.options}>
                 <button
                   onClick={() =>
-                    handleAnswer(questions[currentQuestionIndex].id, "Sí")
+                    handleAnswer(questions[currentQuestionIndex].id, undefined, true)
                   }
                   className={`${styles.option} ${
-                    answers[questions[currentQuestionIndex].id] === "Sí" &&
-                    styles.optionSelected
+                    answers.answer === true
+                  } ${
+                    currentQuestionIndex === 9 ? styles.optionSelected : ""
                   }`}
                 >
                   Sí
                 </button>
                 <button
                   onClick={() =>
-                    handleAnswer(questions[currentQuestionIndex].id, "No")
+                    handleAnswer(questions[currentQuestionIndex].id, undefined, false)
                   }
                   className={`${styles.option} ${
-                    answers[questions[currentQuestionIndex].id] === "No" &&
-                    styles.optionSelected
+                    answers.answer === false
+                  } ${
+                    currentQuestionIndex === 9 ? styles.optionSelected : ""
                   }`}
                 >
                   No

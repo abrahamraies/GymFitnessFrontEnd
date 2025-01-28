@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styles from "./RecommendationsPage.module.css";
 import axios from "axios";
 import { Recommendation } from "../../interfaces/RecommendationInterface";
+import { ArrowLeft, ExternalLink } from "lucide-react"
 
 const RecommendationsPage: React.FC = () => {
     const { categoryId } = useParams<{ categoryId: string }>();
@@ -26,8 +27,8 @@ const RecommendationsPage: React.FC = () => {
         fetchRecommendations();
       }, [categoryId]);
     
-      if (loading) return <p>Loading recommendations...</p>;
-      if (error) return <p className={styles.error}>{error}</p>;
+      if (loading) return <div className={styles.loader}>Loading recommendations...</div>
+      if (error) return <p className={styles.error}>{error}</p>
       
   return (
     <main className={styles.container}>
@@ -41,16 +42,16 @@ const RecommendationsPage: React.FC = () => {
       <section className={styles.resourceList}>
         {recommendations.map((recommendation) => (
           <div key={recommendation.id} className={styles.resourceItem}>
-            <h3>{recommendation.title}</h3>
-            <p>{recommendation.description}</p>
-            <a href={recommendation.url} target="_blank" rel="noopener noreferrer">
-              Learn More
+            <h3 className={styles.resourceTitle}>{recommendation.title}</h3>
+            <p className={styles.resourceDescription}>{recommendation.description}</p>
+            <a href={recommendation.url} target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>
+              Learn More <ExternalLink size={16} />
             </a>
           </div>
         ))}
       </section>
       <button onClick={() => navigate(-1)} className={styles.backButton}>
-        Back
+        <ArrowLeft size={20} /> Back
       </button>
     </main>
   );
