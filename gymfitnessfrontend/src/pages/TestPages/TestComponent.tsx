@@ -11,7 +11,7 @@ const TestComponent = () => {
   const [userInfo, setUserInfo] = useState<User>({ name: "", email: "" });
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-  const [answers, setAnswers] = useState<TestAnswer>({} as TestAnswer);
+  const [answers, setAnswers] = useState<Record<number, TestAnswer>>({});
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -30,14 +30,16 @@ const TestComponent = () => {
     try {
       const userResponse = await axios.post("/api/user/getorcreate", userInfo);
       const UserId = userResponse.data;
-      
+
       if (!UserId) {
         throw new Error("No se pudo obtener el ID del usuario.");
       }
-  
+
       setUserInfo((prev) => ({ ...prev, id: UserId }));
 
-      const questionsResponse = await axios.get("/api/TestQuestion/random?count=10");
+      const questionsResponse = await axios.get(
+        "/api/TestQuestion/random?count=10"
+      );
       setQuestions(questionsResponse.data);
       setStep(1);
     } catch (error) {
@@ -57,7 +59,11 @@ const TestComponent = () => {
     }
   };
 
-  const handleAnswer = (questionId: number, selectedOptionId?: number, answerValue?: boolean) => {
+  const handleAnswer = (
+    questionId: number,
+    selectedOptionId?: number,
+    answerValue?: boolean
+  ) => {
     const answer: TestAnswer = {
       userId: userInfo.id!,
       questionId,
@@ -85,15 +91,23 @@ const TestComponent = () => {
     }
   };
 
+  const isTestComplete = questions.length === Object.keys(answers).length;
+
   const submitTest = async () => {
+    if (!isTestComplete) {
+      alert("Por favor, responde todas las preguntas antes de enviar el test.");
+      return;
+    }
+
     setLoading(true);
     try {
-      const response = await axios.post(`/api/TestAnswer/${userInfo.id}/process`);
+      const response = await axios.post(
+        `/api/TestAnswer/${userInfo.id}/process`
+      );
       setStep(2);
 
       await new Promise((resolve) => setTimeout(resolve, 3000));
       navigate(`/recommendations/${response.data[0].categoryId}`);
-
     } catch (error) {
       console.error("Error al enviar el test:", error);
       alert("Hubo un problema al enviar el test.");
@@ -136,51 +150,63 @@ const TestComponent = () => {
 
       {step === 1 && questions.length > 0 && (
         <div>
-          <h2 className={styles.subtitle}>Pregunta {currentQuestionIndex + 1} de {questions.length}</h2>
+          <h2 className={styles.subtitle}>
+            Pregunta {currentQuestionIndex + 1} de {questions.length}
+          </h2>
           <div className={styles.questionContainer}>
             <p className={styles.questionText}>
               {questions[currentQuestionIndex].question}
             </p>
             {questions[currentQuestionIndex].options?.length ? (
               <div className={styles.options}>
-              {questions[currentQuestionIndex].options.map((option) => (
-                <button
-                  key={option.id}
-                  onClick={() =>
-                    handleAnswer(questions[currentQuestionIndex].id, option.id)
-                  }
-                  className={`${styles.option} ${
-                    answers.selectedOptionId === option.id
-                  } ${
-                    currentQuestionIndex === 9 ? styles.optionSelected : ""
-                  }`}
-                >
-                  {option.text}
-                </button>
-              ))}
+                {questions[currentQuestionIndex].options.map((option) => (
+                  <button
+                    key={option.id}
+                    onClick={() =>
+                      handleAnswer(questions[currentQuestionIndex].id, option.id)
+                    }
+                    className={`${styles.option} ${
+                      answers[questions[currentQuestionIndex].id]?.selectedOptionId ===
+                      option.id
+                        ? styles.optionSelected
+                        : ""
+                    }`}
+                  >
+                    {option.text}
+                  </button>
+                ))}
               </div>
             ) : (
               <div className={styles.options}>
                 <button
                   onClick={() =>
-                    handleAnswer(questions[currentQuestionIndex].id, undefined, true)
+                    handleAnswer(
+                      questions[currentQuestionIndex].id,
+                      undefined,
+                      true
+                    )
                   }
                   className={`${styles.option} ${
-                    answers.answer === true
-                  } ${
-                    currentQuestionIndex === 9 ? styles.optionSelected : ""
+                    answers[questions[currentQuestionIndex].id]?.answer === true
+                      ? styles.optionSelected
+                      : ""
                   }`}
                 >
                   Sí
                 </button>
                 <button
                   onClick={() =>
-                    handleAnswer(questions[currentQuestionIndex].id, undefined, false)
+                    handleAnswer(
+                      questions[currentQuestionIndex].id,
+                      undefined,
+                      false
+                    )
                   }
                   className={`${styles.option} ${
-                    answers.answer === false
-                  } ${
-                    currentQuestionIndex === 9 ? styles.optionSelected : ""
+                    answers[questions[currentQuestionIndex].id]?.answer ===
+                    false
+                      ? styles.optionSelected
+                      : ""
                   }`}
                 >
                   No
@@ -197,10 +223,7 @@ const TestComponent = () => {
               Anterior
             </button>
             {currentQuestionIndex < questions.length - 1 ? (
-              <button
-                onClick={goToNextQuestion}
-                className={styles.button}
-              >
+              <button onClick={goToNextQuestion} className={styles.button}>
                 Siguiente
               </button>
             ) : (
@@ -220,7 +243,8 @@ const TestComponent = () => {
         <div>
           <h2 className={styles.subtitle}>¡Gracias por completar el test!</h2>
           <p className={styles.finalMessage}>
-            Tus respuestas han sido guardadas. Pronto recibirás recomendaciones personalizadas.
+            Tus respuestas han sido guardadas. Pronto recibirás recomendaciones
+            personalizadas.
           </p>
         </div>
       )}
