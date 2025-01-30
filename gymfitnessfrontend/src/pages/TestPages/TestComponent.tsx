@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import styles from "./TestComponent.module.css";
 import { User } from "../../interfaces/UserInterface";
 import { Question } from "../../interfaces/QuestionInterface";
@@ -8,16 +8,29 @@ import { useNavigate } from "react-router-dom";
 
 const TestComponent = () => {
   const [step, setStep] = useState<number>(0);
-  const [userInfo, setUserInfo] = useState<User>({ name: "", email: "" });
+  const [userInfo, setUserInfo] = useState<User>({
+    name: localStorage.getItem("username") || "",
+    email: localStorage.getItem("email") || "",
+  });
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [answers, setAnswers] = useState<Record<number, TestAnswer>>({});
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const storedName = localStorage.getItem("username");
+    const storedEmail = localStorage.getItem("email");
+    if (storedName && storedEmail) {
+      setUserInfo({ name: storedName, email: storedEmail });
+    }
+  }, []);
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
+
+    localStorage.setItem(name === "name" ? "username" : "email", value);
   };
 
   const startTest = async () => {

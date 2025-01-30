@@ -1,9 +1,15 @@
 import React from "react";
 import styles from "./HomePage.module.css";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const HomePage: React.FC = () => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
+
+    const handleStartTest = () => {
+      navigate("/test/start");
+    };
 
       return (
         <main className={styles.container}> 
@@ -16,7 +22,7 @@ const HomePage: React.FC = () => {
             <h2>{t("home.howItWorks")}</h2>
             <p>{t("home.instructions")}</p>
             <div className={styles.buttonContainer}>
-            <button className={styles.startTestButton}>
+            <button className={styles.startTestButton} onClick={handleStartTest}>
               {t("home.startTest")}
             </button>
           </div>
