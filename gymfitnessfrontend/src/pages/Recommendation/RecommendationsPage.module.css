@@ -1,53 +1,60 @@
 .container {
-    max-width: 1000px;
-    margin: 2rem auto;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 2rem;
-    font-family: "Roboto", Arial, sans-serif;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
   }
   
   .header {
-    margin-bottom: 2rem;
     text-align: center;
+    margin-bottom: 3rem;
   }
   
   .title {
     font-size: 2.5rem;
-    font-weight: bold;
-    color: #333;
+    color: var(--primary-color);
     margin-bottom: 1rem;
   }
   
   .subtitle {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     color: #666;
-    margin-bottom: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
   }
   
   .resourceList {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
   }
   
   .resourceItem {
+    background-color: white;
+    border-radius: 10px;
     padding: 1.5rem;
-    background-color: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
   }
   
   .resourceItem:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .icon {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    align-self: center;
   }
   
   .resourceTitle {
-    font-size: 1.25rem;
-    color: #333;
+    font-size: 1.3rem;
+    color: var(--primary-color);
     margin-bottom: 0.5rem;
   }
   
@@ -55,55 +62,80 @@
     font-size: 1rem;
     color: #666;
     margin-bottom: 1rem;
+    flex-grow: 1;
   }
   
   .resourceLink {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    color: #fff;
-    background-color: #007bff;
-    border-radius: 4px;
+    color: var(--secondary-color);
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
+    transition: color 0.3s ease;
   }
   
   .resourceLink:hover {
-    background-color: #0056b3;
+    color: var(--secondary-color-dark);
+  }
+  
+  .resourceLink svg {
+    margin-left: 0.5rem;
   }
   
   .backButton {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
+    justify-content: center;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
     font-size: 1rem;
-    color: #007bff;
-    background-color: transparent;
-    border: 2px solid #007bff;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 2rem;
+    transition: background-color 0.3s ease;
   }
   
   .backButton:hover {
-    color: #fff;
-    background-color: #007bff;
+    background-color: var(--secondary-color-dark);
+  }
+  
+  .backButton svg {
+    margin-right: 0.5rem;
+  }
+  
+  .loader, .error {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 5px;
   }
   
   .loader {
-    text-align: center;
-    font-size: 1.25rem;
-    color: #666;
-    margin-top: 2rem;
+    background-color: #e3f2fd;
+    color: #1565c0;
   }
   
   .error {
-    text-align: center;
-    font-size: 1.25rem;
-    color: #dc3545;
-    margin-top: 2rem;
-  }  
+    background-color: #ffebee;
+    color: #c62828;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+  
+    .title {
+      font-size: 2rem;
+    }
+  
+    .subtitle {
+      font-size: 1rem;
+    }
+  
+    .resourceList {
+      grid-template-columns: 1fr;
+    }
+  }

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styles from "./RecommendationsPage.module.css";
 import axios from "axios";
 import { Recommendation } from "../../interfaces/RecommendationInterface";
-import { ArrowLeft, ExternalLink } from "lucide-react"
+import { ArrowLeft, ExternalLink, Book } from 'lucide-react'
 
 const RecommendationsPage: React.FC = () => {
     const { categoryId } = useParams<{ categoryId: string }>();
@@ -28,7 +28,7 @@ const RecommendationsPage: React.FC = () => {
       }, [categoryId]);
     
       if (loading) return <div className={styles.loader}>Loading recommendations...</div>
-      if (error) return <p className={styles.error}>{error}</p>
+      if (error) return <div className={styles.error}>{error}</div>
       
   return (
     <main className={styles.container}>
@@ -42,6 +42,7 @@ const RecommendationsPage: React.FC = () => {
       <section className={styles.resourceList}>
         {recommendations.map((recommendation) => (
           <div key={recommendation.id} className={styles.resourceItem}>
+            <Book className={styles.icon} />
             <h3 className={styles.resourceTitle}>{recommendation.title}</h3>
             <p className={styles.resourceDescription}>{recommendation.description}</p>
             <a href={recommendation.url} target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>

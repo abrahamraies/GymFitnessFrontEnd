@@ -12,32 +12,36 @@ const NavBar: React.FC = () => {
   };
 
   return (
-    <nav className={styles.navbar}> 
-    {/* //hacer que sea fijo para todas las paginas. */}
-      <h1 className={styles.logo}>Gym & Fitness Guide</h1>
-      <ul className={styles.navLinks}>
-        <li>
-          <Link to="/" className={styles.navLink}>
-          {t("navbar.home")}
-          </Link>
-        </li>
-        <li>
-          <Link to="/test" className={styles.navLink}>
-            Test
-          </Link>
-        </li>
-        <li>
-          <Link to="/about" className={styles.navLink}>
-            {t("navbar.about")}
-          </Link>
-        </li>
-        <li>
-          <button onClick={toggleLanguage} className={styles.languageButton}>
-            {t("navbar.changeLanguage")}
-          </button> 
-          {/* //quitar el borde al apretarlo. */}
-        </li>
-      </ul>
+    <nav className={`${styles.navbar} nav-menu`} aria-label="Main navigation">
+      <div className={styles.navbarContent}>
+        <h1 className={styles.logo}>Gym & Fitness Guide</h1>
+        <ul className={styles.navLinks}>
+          <li>
+            <Link to="/" className={styles.navLink}>
+              {t("navbar.home")}
+            </Link>
+          </li>
+          <li>
+            <Link to="/test" className={styles.navLink}>
+              Test
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className={styles.navLink}>
+              {t("navbar.about")}
+            </Link>
+          </li>
+          <li>
+            <button 
+              onClick={toggleLanguage} 
+              className={`${styles.languageButton} btn`}
+              aria-label={t("navbar.changeLanguageAriaLabel")}
+            >
+              {t("navbar.changeLanguage")}
+            </button> 
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 };

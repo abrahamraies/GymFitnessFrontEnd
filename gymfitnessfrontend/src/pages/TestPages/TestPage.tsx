@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./TestPage.module.css";
 import { useTranslation } from "react-i18next";
+import { FaPlay, FaUser } from 'react-icons/fa';
 
 const TestPage: React.FC = () => {
   const { t } = useTranslation();
@@ -25,10 +26,12 @@ const TestPage: React.FC = () => {
       </header>
 
       <div className={styles.buttonContainer}>
-        <button className={styles.button} onClick={handleStartTest}>
+        <button className={`${styles.button} ${styles.startButton}`} onClick={handleStartTest}>
+          <FaPlay className={styles.icon} />
           {t("test.startTest")}
         </button>
-        <button className={styles.button} onClick={handleProfileSelection}>
+        <button className={`${styles.button} ${styles.profileButton}`} onClick={handleProfileSelection}>
+          <FaUser className={styles.icon} />
           {t("test.knowProfile")}
         </button>
       </div>

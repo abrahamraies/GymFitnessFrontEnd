@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./CategorySelectionPage.module.css";
+import { FaArrowLeft, FaDumbbell } from 'react-icons/fa';
 
 interface Category {
   id: string;
@@ -33,8 +34,8 @@ const CategorySelectionPage: React.FC = () => {
     navigate(`/recommendations/${categoryId}`);
   };
 
-  if (loading) return <p>Loading categories...</p>;
-  if (error) return <p className={styles.error}>{error}</p>;
+  if (loading) return <div className={styles.loading}>Loading categories...</div>;
+  if (error) return <div className={styles.error}>{error}</div>;
 
   return (
     <main className={styles.container}>
@@ -47,16 +48,18 @@ const CategorySelectionPage: React.FC = () => {
 
       <section className={styles.categoryList}>
         {categories.map((category) => (
-          <div
+          <button
             key={category.id}
             className={styles.categoryCard}
             onClick={() => handleCategoryClick(category.id)}
           >
+            <FaDumbbell className={styles.icon} />
             {category.name}
-          </div>
+          </button>
         ))}
       </section>
       <button onClick={() => navigate(-1)} className={styles.backButton}>
+        <FaArrowLeft />
         Back
       </button>
     </main>

@@ -12,8 +12,7 @@
     "featureList": [
       "Recomendaciones de entrenamiento personalizadas",
       "Acceso a recursos y guías de fitness",
-      "Herramientas para seguir tu progreso",
-      "Soporte de la comunidad"
+      "Herramientas para seguir tu progreso"
     ],
     "howItWorks": "Cómo Funciona",
     "instructions": "Haz una prueba rápida para descubrir el mejor plan de entrenamiento para ti. Ya sea que prefieras entrenar en el gimnasio, en casa o explorar yoga y meditación, tenemos todo lo que necesitas.",
@@ -29,9 +28,7 @@
       "💪 Acceso a los mejores recursos, incluidos canales de YouTube y aplicaciones.",
       "🧘‍♂️ Opciones para entrenar en el gimnasio, en casa, yoga, pilates, meditación y más.",
       "📊 Herramientas para rastrear tu progreso y tu viaje fitness."
-    ],
-    "getInTouchHeader": "Contáctanos",
-    "getInTouchMessage": "¿Tienes preguntas o comentarios? No dudes en comunicarte. ¡Nos encantaría saber de ti!"
+    ]
   },
   "test":{
     "welcome": "Bienvenido al Fitness Test",

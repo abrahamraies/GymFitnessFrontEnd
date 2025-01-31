@@ -12,8 +12,7 @@
     "featureList": [
       "Personalized workout recommendations",
       "Access to fitness resources and guides",
-      "Tools to track your progress",
-      "Community support"
+      "Tools to track your progress"
     ],
     "howItWorks": "How it Works",
     "instructions": "Take a quick fitness test to discover the best workout plan for you. Whether you prefer working out at the gym, at home, or exploring yoga and meditation, we have everything you need.",
@@ -29,9 +28,7 @@
       "💪 Access to top resources, including YouTube channels and apps.",
       "🧘‍♂️ Options for gym training, home workouts, yoga, pilates, meditation, and more.",
       "📊 Tools to track your fitness journey and progress."
-    ],
-    "getInTouchHeader": "Get in Touch",
-    "getInTouchMessage": "Have questions or feedback? Feel free to reach out. We'd love to hear from you!"
+    ]
   },
   "test":{
     "welcome": "Welcome to the Fitness Test",
