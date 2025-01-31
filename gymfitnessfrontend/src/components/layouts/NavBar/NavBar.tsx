@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './NavBar.module.css';
 import { useTranslation } from "react-i18next";
+import { ThemeContext } from "../../../utils/context/ThemeContext";
 
 const NavBar: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const { theme, toggleTheme } = useContext(ThemeContext)!;
 
   const toggleLanguage = () => {
     const newLanguage = i18n.language === "en" ? "es" : "en";
@@ -40,6 +42,11 @@ const NavBar: React.FC = () => {
               {t("navbar.changeLanguage")}
             </button> 
           </li>
+          <li>
+          <button onClick={toggleTheme} className={styles.themeButton}>
+            {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+          </button>
+        </li>
         </ul>
       </div>
     </nav>

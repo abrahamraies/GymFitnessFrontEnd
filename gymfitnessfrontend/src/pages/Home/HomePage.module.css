@@ -25,7 +25,7 @@
 }
 
 .howItWorksSection, .featureSection {
-  background-color: white;
+  background-color: var(--bg-color);
   padding: 2rem;
   margin-bottom: 2rem;
   border-radius: 10px;
@@ -68,7 +68,7 @@
 .featureItem {
   display: flex;
   align-items: center;
-  background-color: #f8f8f8;
+  background-color:var(--bg-color);
   padding: 1.5rem;
   border-radius: 8px;
   transition: transform 0.3s ease;

@@ -4,23 +4,30 @@
   --secondary-color: #2ca3d2;
   --secondary-color-dark: #000000;
   --text-color: #333;
-  --background-color: #f4f4f4;
+  --bg-color: #ffffff;
   --card-background: #ffffff;
   --border-radius: 8px;
   --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dark {
+  --bg-color: #242424;
+  --text-color: #ffffff;
+  --primary-color: #073dff;
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  line-height: 1.6;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-body {
-  font-family: 'Roboto', Arial, sans-serif;
-  line-height: 1.6;
-  color: var(--text-color);
-  background-color: var(--background-color);
 }
 
 .container {
