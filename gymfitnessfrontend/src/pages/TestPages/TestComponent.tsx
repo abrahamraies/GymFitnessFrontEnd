@@ -124,6 +124,12 @@ const TestComponent = () => {
       {step === 1 && questions.length > 0 && (
         <div>
           <h2 className={styles.subtitle}>Pregunta {currentQuestionIndex + 1} de {questions.length}</h2>
+          <div className={styles.progressBar}>
+            <div 
+              className={styles.progressFill} 
+              style={{width: `${((currentQuestionIndex + 1) / questions.length) * 100}%`}}
+            ></div>
+          </div>
           <div className={styles.questionContainer}>
             <p className={styles.questionText}>{questions[currentQuestionIndex].question}</p>
             {questions[currentQuestionIndex].options?.length ? (

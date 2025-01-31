@@ -14,7 +14,7 @@ const NavBar: React.FC = () => {
   return (
     <nav className={`${styles.navbar} nav-menu`} aria-label="Main navigation">
       <div className={styles.navbarContent}>
-        <h1 className={styles.logo}>Gym & Fitness Guide</h1>
+        <h1 className={styles.logo}> <Link to="/" className={styles.navLink}> Gym & Fitness Guide </Link></h1>
         <ul className={styles.navLinks}>
           <li>
             <Link to="/" className={styles.navLink}>
