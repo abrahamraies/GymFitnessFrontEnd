@@ -4,6 +4,7 @@ import styles from "./RecommendationsPage.module.css";
 import axios from "axios";
 import { Recommendation } from "../../interfaces/RecommendationInterface";
 import { ArrowLeft, ExternalLink, Book } from 'lucide-react'
+import { useTranslation } from "react-i18next";
 
 const RecommendationsPage: React.FC = () => {
     const { categoryId } = useParams<{ categoryId: string }>();
@@ -11,6 +12,7 @@ const RecommendationsPage: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchRecommendations = async () => {
@@ -27,15 +29,15 @@ const RecommendationsPage: React.FC = () => {
         fetchRecommendations();
       }, [categoryId]);
     
-      if (loading) return <div className={styles.loader}>Loading recommendations...</div>
+      if (loading) return <div className={styles.loader}>{t("recommendations.load")}</div>
       if (error) return <div className={styles.error}>{error}</div>
       
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Recommendations</h1>
+        <h1 className={styles.title}>{t("recommendations.title")}</h1>
         <p className={styles.subtitle}>
-          Here are some suggestions for your chosen category:
+        {t("recommendations.description")}
         </p>
       </header>
 
@@ -46,13 +48,13 @@ const RecommendationsPage: React.FC = () => {
             <h3 className={styles.resourceTitle}>{recommendation.title}</h3>
             <p className={styles.resourceDescription}>{recommendation.description}</p>
             <a href={recommendation.url} target="_blank" rel="noopener noreferrer" className={styles.resourceLink}>
-              Learn More <ExternalLink size={16} />
+            {t("recommendations.moreInfo")} <ExternalLink size={16} />
             </a>
           </div>
         ))}
       </section>
       <button onClick={() => navigate(-1)} className={styles.backButton}>
-        <ArrowLeft size={20} /> Back
+        <ArrowLeft size={20} /> {t("general.back")}
       </button>
     </main>
   );

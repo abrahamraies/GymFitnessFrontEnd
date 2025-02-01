@@ -35,5 +35,39 @@
     "description": "Find your ideal fitness journey based on your preferences.",
     "startTest": "Start Test",
     "knowProfile": "I already know my profile"
+  },
+  "testComponent":{
+    "alertUser": "Please complete all fields.",
+    "alertLoad": "There was a problem loading the questions.",
+    "alertAnswers": "Please answer all questions before submitting the test.",
+    "alertSubmit": "There was a problem submitting the test.",
+    "welcome":"Welcome to the Test",
+    "inputData": "Please enter your information below:",
+    "inputName": "Username",
+    "inputEmail": "Email",
+    "load": "Loading...",
+    "question": "Question",
+    "yes": "Yes",
+    "no": "No",
+    "thanks": "Thank you for taking the test!",
+    "finalMessage": "Your answers have been saved. You will receive personalized recommendations soon."
+  },
+  "category":{
+    "load": "Loading categories...",
+    "title": "Choose Your Fitness Category",
+    "description": "Select a category to explore resources and start your journey!"
+  },
+  "recommendations":{
+    "load":"Loading recommendations...",
+    "title": "Recommendations",
+    "description": "Here are some suggestions for your chosen category:",
+    "moreInfo": "Learn More"
+  },
+  "general":{
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit test",
+    "sending": "Sending..."
   }
 }

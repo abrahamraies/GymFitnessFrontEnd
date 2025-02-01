@@ -35,5 +35,39 @@
     "description": "Encontra tu entrenamiento de fitness ideal basado en tus preferencias.",
     "startTest": "Iniciar Test",
     "knowProfile": "Ya conozco mi perfil"
+  },
+  "testComponent":{
+    "alertUser": "Por favor, completa todos los campos.",
+    "alertLoad": "Hubo un problema al cargar las preguntas.",
+    "alertAnswers": "Por favor, responde todas las preguntas antes de enviar el test.",
+    "alertSubmit": "Hubo un problema al enviar el test.",
+    "welcome":"Bienvenido al Test",
+    "inputData": "Por favor, ingresa tus datos para comenzar.",
+    "inputName": "Nombre de usuario",
+    "inputEmail": "Correo electrónico",
+    "load": "Cargando...",
+    "question": "Pregunta",
+    "yes": "Si",
+    "no": "No",
+    "thanks": "¡Gracias por completar el test!",
+    "finalMessage": "Tus respuestas han sido guardadas. Pronto recibirás recomendaciones personalizadas."
+  },
+  "category":{
+    "load": "Cargando categorias...",
+    "title": "Elegi tu Categoria de Fitness",
+    "description": "¡Selecciona una categoría para explorar los recursos y comenzar tu entrenamiento!"
+  },
+  "recommendations":{
+    "load":"Cargando recomendaciones...",
+    "title": "Recomendaciones",
+    "description": "Estas son algunas sugerencias para la categoría elegida:",
+    "moreInfo": "Más Información"
+  },
+  "general":{
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "submit": "Finalizar test",
+    "sending": "Enviando..."
   }
 }

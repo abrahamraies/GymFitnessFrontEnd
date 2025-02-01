@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./CategorySelectionPage.module.css";
 import { FaArrowLeft, FaDumbbell } from 'react-icons/fa';
+import { useTranslation } from "react-i18next";
 
 interface Category {
   id: string;
@@ -13,6 +14,7 @@ const CategorySelectionPage: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,15 +36,15 @@ const CategorySelectionPage: React.FC = () => {
     navigate(`/recommendations/${categoryId}`);
   };
 
-  if (loading) return <div className={styles.loading}>Loading categories...</div>;
+  if (loading) return <div className={styles.loading}>{t("category.load")}</div>;
   if (error) return <div className={styles.error}>{error}</div>;
 
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Choose Your Fitness Category</h1>
+        <h1 className={styles.title}>{t("category.title")}</h1>
         <p className={styles.subtitle}>
-          Select a category to explore resources and start your journey!
+        {t("category.description")}
         </p>
       </header>
 
@@ -60,7 +62,7 @@ const CategorySelectionPage: React.FC = () => {
       </section>
       <button onClick={() => navigate(-1)} className={styles.backButton}>
         <FaArrowLeft />
-        Back
+        {t("general.back")}
       </button>
     </main>
   );
