@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #4CAF50;
+  --primary-color: #4caf50;
   --primary-color-dark: #000000;
   --secondary-color: #2ca3d2;
   --secondary-color-dark: #000000;
@@ -21,7 +21,9 @@ body {
   line-height: 1.6;
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 * {
@@ -36,7 +38,9 @@ body {
   padding: 20px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin-bottom: 20px;
 }
 
@@ -72,8 +76,8 @@ h1, h2, h3 {
   margin-bottom: 5px;
 }
 
-.form-group input[type="text"],
-.form-group input[type="email"],
+.form-group input[type='text'],
+.form-group input[type='email'],
 .form-group select {
   width: 100%;
   padding: 10px;
@@ -121,7 +125,7 @@ h1, h2, h3 {
   .container {
     padding: 10px;
   }
-  
+
   .btn {
     width: 100%;
   }

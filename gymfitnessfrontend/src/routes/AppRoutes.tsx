@@ -1,17 +1,17 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MainLayout from "../components/layouts/MainLayout";
-import AboutPage from "../pages/about/AboutPage";
-import HomePage from "../pages/Home/HomePage";
-import TestPage from "../pages/TestPages/TestPage";
-import CategorySelectionPage from "../pages/CategorySelection/CategorySelectionPage";
-import RecommendationsPage from "../pages/Recommendation/RecommendationsPage";
-import TestComponent from "../pages/TestPages/TestComponent";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainLayout from '../components/layouts/MainLayout';
+import AboutPage from '../pages/about/AboutPage';
+import HomePage from '../pages/Home/HomePage';
+import TestPage from '../pages/TestPages/TestPage';
+import CategorySelectionPage from '../pages/CategorySelection/CategorySelectionPage';
+import RecommendationsPage from '../pages/Recommendation/RecommendationsPage';
+import TestComponent from '../pages/TestPages/TestComponent';
 
 const AppRoutes: React.FC = () => {
-    return (
-      <Router>
-        <Routes>
+  return (
+    <Router>
+      <Routes>
         <Route
           path="/"
           element={
@@ -61,8 +61,8 @@ const AppRoutes: React.FC = () => {
           }
         />
       </Routes>
-      </Router>
-    );
-  };
-  
-  export default AppRoutes;
+    </Router>
+  );
+};
+
+export default AppRoutes;

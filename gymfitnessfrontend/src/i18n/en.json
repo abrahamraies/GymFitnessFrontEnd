@@ -30,18 +30,18 @@
       "📊 Tools to track your fitness journey and progress."
     ]
   },
-  "test":{
+  "test": {
     "welcome": "Welcome to the Fitness Test",
     "description": "Find your ideal fitness journey based on your preferences.",
     "startTest": "Start Test",
     "knowProfile": "I already know my profile"
   },
-  "testComponent":{
+  "testComponent": {
     "alertUser": "Please complete all fields.",
     "alertLoad": "There was a problem loading the questions.",
     "alertAnswers": "Please answer all questions before submitting the test.",
     "alertSubmit": "There was a problem submitting the test.",
-    "welcome":"Welcome to the Test",
+    "welcome": "Welcome to the Test",
     "inputData": "Please enter your information below:",
     "inputName": "Username",
     "inputEmail": "Email",
@@ -52,20 +52,20 @@
     "thanks": "Thank you for taking the test!",
     "finalMessage": "Your answers have been saved. You will receive personalized recommendations soon."
   },
-  "category":{
+  "category": {
     "load": "Loading categories...",
     "title": "Choose Your Fitness Category",
     "description": "Select a category to explore resources and start your journey!",
     "error": "Failed to load categories. Please try again later. "
   },
-  "recommendations":{
-    "load":"Loading recommendations...",
+  "recommendations": {
+    "load": "Loading recommendations...",
     "title": "Recommendations",
     "description": "Here are some suggestions for your chosen category:",
     "moreInfo": "Learn More",
     "error": "Failed to load recommendations. Please try again later. "
   },
-  "general":{
+  "general": {
     "back": "Back",
     "next": "Next",
     "previous": "Previous",

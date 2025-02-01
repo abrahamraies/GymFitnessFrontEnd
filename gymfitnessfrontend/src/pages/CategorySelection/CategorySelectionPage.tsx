@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import styles from "./CategorySelectionPage.module.css";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import styles from './CategorySelectionPage.module.css';
 import { FaArrowLeft, FaDumbbell } from 'react-icons/fa';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 interface Category {
   id: string;
@@ -20,10 +20,10 @@ const CategorySelectionPage: React.FC = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("/api/category");
+        const response = await axios.get('/api/category');
         setCategories(response.data);
       } catch (err) {
-        setError(t("category.error") + err);
+        setError(t('category.error') + err);
       } finally {
         setLoading(false);
       }
@@ -36,16 +36,15 @@ const CategorySelectionPage: React.FC = () => {
     navigate(`/recommendations/${categoryId}`);
   };
 
-  if (loading) return <div className={styles.loading}>{t("category.load")}</div>;
+  if (loading)
+    return <div className={styles.loading}>{t('category.load')}</div>;
   if (error) return <div className={styles.error}>{error}</div>;
 
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>{t("category.title")}</h1>
-        <p className={styles.subtitle}>
-        {t("category.description")}
-        </p>
+        <h1 className={styles.title}>{t('category.title')}</h1>
+        <p className={styles.subtitle}>{t('category.description')}</p>
       </header>
 
       <section className={styles.categoryList}>
@@ -62,7 +61,7 @@ const CategorySelectionPage: React.FC = () => {
       </section>
       <button onClick={() => navigate(-1)} className={styles.backButton}>
         <FaArrowLeft />
-        {t("general.back")}
+        {t('general.back')}
       </button>
     </main>
   );
