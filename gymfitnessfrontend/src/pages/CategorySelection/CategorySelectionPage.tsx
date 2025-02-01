@@ -23,14 +23,14 @@ const CategorySelectionPage: React.FC = () => {
         const response = await axios.get("/api/category");
         setCategories(response.data);
       } catch (err) {
-        setError("Failed to load categories. Please try again later." + err);
+        setError(t("category.error") + err);
       } finally {
         setLoading(false);
       }
     };
 
     fetchCategories();
-  }, []);
+  }, [t]);
 
   const handleCategoryClick = (categoryId: string) => {
     navigate(`/recommendations/${categoryId}`);

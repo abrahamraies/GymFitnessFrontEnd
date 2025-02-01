@@ -55,13 +55,15 @@
   "category":{
     "load": "Cargando categorias...",
     "title": "Elegi tu Categoria de Fitness",
-    "description": "¡Selecciona una categoría para explorar los recursos y comenzar tu entrenamiento!"
+    "description": "¡Selecciona una categoría para explorar los recursos y comenzar tu entrenamiento!",
+    "error": "No se han podido cargar las categorías. Vuelva a intentarlo más tarde. "
   },
   "recommendations":{
     "load":"Cargando recomendaciones...",
     "title": "Recomendaciones",
     "description": "Estas son algunas sugerencias para la categoría elegida:",
-    "moreInfo": "Más Información"
+    "moreInfo": "Más Información",
+    "error": "No se han podido cargar las recomendaciones. Vuelva a intentarlo más tarde. "
   },
   "general":{
     "back": "Atrás",

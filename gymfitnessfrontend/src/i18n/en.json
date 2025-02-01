@@ -55,13 +55,15 @@
   "category":{
     "load": "Loading categories...",
     "title": "Choose Your Fitness Category",
-    "description": "Select a category to explore resources and start your journey!"
+    "description": "Select a category to explore resources and start your journey!",
+    "error": "Failed to load categories. Please try again later. "
   },
   "recommendations":{
     "load":"Loading recommendations...",
     "title": "Recommendations",
     "description": "Here are some suggestions for your chosen category:",
-    "moreInfo": "Learn More"
+    "moreInfo": "Learn More",
+    "error": "Failed to load recommendations. Please try again later. "
   },
   "general":{
     "back": "Back",

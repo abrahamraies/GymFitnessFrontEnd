@@ -20,14 +20,14 @@ const RecommendationsPage: React.FC = () => {
             const response = await axios.get(`/api/recommendations/category/${categoryId}`);
             setRecommendations(response.data);
           } catch (err) {
-            setError("Failed to load recommendations. Please try again later. " + err);
+            setError(t("recommendations.error") + err);
           } finally {
             setLoading(false);
           }
         };
     
         fetchRecommendations();
-      }, [categoryId]);
+      }, [t,categoryId]);
     
       if (loading) return <div className={styles.loader}>{t("recommendations.load")}</div>
       if (error) return <div className={styles.error}>{error}</div>
