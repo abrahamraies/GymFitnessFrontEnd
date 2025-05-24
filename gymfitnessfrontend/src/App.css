@@ -46,30 +46,7 @@
   width: 100%;
 }
 
-.nav-menu {
-  background-color: grey;
-}
-
-.nav-menu ul {
-  list-style-type: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-}
-
-.nav-menu li {
-  margin: 0 15px;
-}
-
-.nav-menu a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.nav-menu a:hover {
-  text-decoration: underline;
-}
+/* Styles for .nav-menu were removed as NavBar is now using Material-UI */
 
 .test-intro {
   max-width: 600px;
