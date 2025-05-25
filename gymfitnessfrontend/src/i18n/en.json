@@ -8,14 +8,32 @@
   "home": {
     "welcome": "Welcome to Gym & Fitness Guide",
     "description": "Discover your ideal fitness path—yoga, gym, home workouts, pilates, and more!",
+    "hero": {
+      "title": "Discover Your Perfect Fitness Path",
+      "tagline": "Take our quick test to get personalized recommendations and achieve your fitness goals faster."
+    },
     "features": "Features",
     "featureList": [
       "Personalized workout recommendations",
       "Access to fitness resources and guides",
       "Tools to track your progress"
     ],
-    "howItWorks": "How it Works",
+    "howItWorks": "How It Works",
     "instructions": "Take a quick fitness test to discover the best workout plan for you. Whether you prefer working out at the gym, at home, or exploring yoga and meditation, we have everything you need.",
+    "howItWorksSteps": {
+      "step1": {
+        "title": "1. Take the Test",
+        "description": "Answer a few simple questions about your goals and preferences."
+      },
+      "step2": {
+        "title": "2. Get Profiled",
+        "description": "Our system analyzes your answers to create your unique fitness profile."
+      },
+      "step3": {
+        "title": "3. Receive Guidance",
+        "description": "Access personalized recommendations for exercises and routines."
+      }
+    },
     "startTest": "Start Test"
   },
   "about": {

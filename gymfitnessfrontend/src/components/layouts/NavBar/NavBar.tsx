@@ -80,12 +80,14 @@ const NavBar: React.FC = () => {
     </Box>
   );
 
+  const currentTheme = useTheme(); // For accessing theme palette directly for hover effects
+
   return (
     <>
-      <AppBar component="nav" position="static" sx={{ backgroundColor: 'grey.700' }}> {/* Changed AppBar color */}
+      <AppBar component="nav" position="static" color="primary"> {/* Uses theme.palette.primary.main */}
         <Toolbar>
           <IconButton
-            color="inherit" // Ensures icon color contrasts with AppBar
+            color="inherit" // Inherits primary.contrastText
             aria-label={t('navbar.openDrawerAriaLabel')}
             edge="start"
             onClick={handleDrawerToggle}
@@ -99,38 +101,59 @@ const NavBar: React.FC = () => {
             to="/"
             sx={{
               flexGrow: 1,
-              color: 'inherit', // Ensures text color contrasts
+              color: 'inherit', // Inherits primary.contrastText
               textDecoration: 'none',
+              fontFamily: theme === 'light' ? currentTheme.typography.h6.fontFamily : currentTheme.typography.h6.fontFamily, // Explicitly Poppins
+              fontWeight: theme === 'light' ? currentTheme.typography.h6.fontWeight : currentTheme.typography.h6.fontWeight,
               '&:hover': {
-                color: 'primary.contrastText', // Optional: hover effect
+                // No specific color change on hover, rely on inherit or add subtle opacity/brightness if needed
               },
-              display: { xs: 'block', sm: 'block' } // Adjusted for visibility
+              display: { xs: 'block', sm: 'block' } 
             }}
           >
             Gym & Fitness Guide
           </Typography>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 1 }}> {/* Added gap for spacing */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}> {/* Reduced gap slightly */}
             {navItems.map((item) => (
               <Button
                 key={item.path}
                 component={RouterLink}
                 to={item.path}
-                sx={{ my: 1, px: 1.5, color: 'white', '&:hover': { backgroundColor: 'grey.600' } }} // Enhanced styling
+                color="inherit" // Inherits primary.contrastText
+                sx={{ 
+                  my: 1, 
+                  px: 1.5, 
+                  '&:hover': { 
+                    backgroundColor: currentTheme.palette.mode === 'light' ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.12)', // Subtle hover
+                  } 
+                }}
               >
                 {t(item.labelKey)}
               </Button>
             ))}
             <Button
-              color="inherit"
+              color="inherit" // Inherits primary.contrastText
               onClick={toggleLanguage}
-              sx={{ my: 1, px: 1.5, color: 'white', '&:hover': { backgroundColor: 'grey.600' } }} // Enhanced styling
+              sx={{ 
+                my: 1, 
+                px: 1.5, 
+                '&:hover': { 
+                  backgroundColor: currentTheme.palette.mode === 'light' ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.12)',
+                } 
+              }}
             >
               {i18n.language.toUpperCase()}
             </Button>
             <IconButton
               onClick={toggleTheme}
-              color="inherit" // Ensures icon color contrasts
-              sx={{ my: 1, px: 1.5, '&:hover': { backgroundColor: 'grey.600' } }} // Enhanced styling
+              color="inherit" // Inherits primary.contrastText
+              sx={{ 
+                my: 1, 
+                px: 1.5, 
+                '&:hover': { 
+                  backgroundColor: currentTheme.palette.mode === 'light' ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.12)',
+                } 
+              }}
             >
               {theme === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
             </IconButton>
@@ -146,11 +169,14 @@ const NavBar: React.FC = () => {
             keepMounted: true, // Better open performance on mobile.
           }}
           PaperProps={{
-            sx: { backgroundColor: 'grey.100' } // Light grey background for drawer
+            sx: { 
+              backgroundColor: currentTheme.palette.background.paper, // Use theme's paper color
+              width: 250 
+            } 
           }}
           sx={{
             display: { xs: 'block', md: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250 },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box' }, // Width is now in PaperProps
           }}
         >
           {drawer}
