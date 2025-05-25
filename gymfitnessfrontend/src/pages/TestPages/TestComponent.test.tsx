@@ -4,6 +4,8 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from '../../i18n'; // Adjust path
 import TestComponent from './TestComponent';
 import userEvent from '@testing-library/user-event';
+import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
+import { getAppTheme } from '../../theme'; // Adjust path as needed
 
 // Mocks for react-query hooks
 const mockUseGetOrCreateUser = vi.fn();
@@ -63,11 +65,15 @@ const initialMockValues = {
   },
 };
 
+const muiTheme = createTheme(getAppTheme('light')); // Use a specific mode for testing
+
 const renderTestComponent = () => {
   return render(
-    <I18nextProvider i18n={i18n}>
-      <TestComponent />
-    </I18nextProvider>
+    <MuiThemeProvider theme={muiTheme}>
+      <I18nextProvider i18n={i18n}>
+        <TestComponent />
+      </I18nextProvider>
+    </MuiThemeProvider>
   );
 };
 
@@ -91,12 +97,13 @@ describe('TestComponent', () => {
 
   it('Test 1 (Initial State - User Info Input): should render input fields and start button', () => {
     renderTestComponent();
-    expect(screen.getByPlaceholderText(i18n.t('testComponent.inputName'))).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(i18n.t('testComponent.inputEmail'))).toBeInTheDocument();
+    // MUI TextFields are queried by label
+    expect(screen.getByLabelText(i18n.t('testComponent.inputName'))).toBeInTheDocument();
+    expect(screen.getByLabelText(i18n.t('testComponent.inputEmail'))).toBeInTheDocument();
     expect(screen.getByRole('button', { name: i18n.t('test.startTest') })).toBeInTheDocument();
   });
 
-  it('Test 2 (Loading State - Starting Test): should show loading state on start button', async () => {
+  it('Test 2 (Loading State - Starting Test): should show loading state on start button and CircularProgress', async () => {
     const user = userEvent.setup();
     mockUseGetOrCreateUser.mockReturnValue({
       ...initialMockValues.getOrCreateUser,
@@ -104,80 +111,57 @@ describe('TestComponent', () => {
     });
     renderTestComponent();
 
-    const startButton = screen.getByRole('button', { name: i18n.t('general.loading') }); // Text changes to loading
+    const startButton = screen.getByRole('button', { name: i18n.t('general.loading') });
     expect(startButton).toBeInTheDocument();
-    expect(startButton).toBeDisabled(); // Button should be disabled while loading
+    expect(startButton).toBeDisabled();
+    // Check for CircularProgress (it's inside the button as startIcon)
+    expect(startButton.querySelector('[role="progressbar"]')).toBeInTheDocument();
   });
 
-  it('Test 3 (Error State - Failing to Load Questions): should display an error message', async () => {
+  it('Test 3 (Error State - Failing to Load Questions): should display an error message using Typography', async () => {
     const user = userEvent.setup();
     const errorMessage = 'Network Error';
     initialMockValues.getOrCreateUser.mutateAsync.mockResolvedValue({ id: 1, name: 'Test User', email: 'test@example.com' });
     mockUseGetOrCreateUser.mockReturnValue(initialMockValues.getOrCreateUser);
 
-    mockUseRandomQuestions.mockReturnValue({
+    // Simulate error after attempting to fetch questions in startTest
+    initialMockValues.getOrCreateUser.mutateAsync.mockResolvedValueOnce({ id: 1, name: 'Test User', email: 'test@example.com' });
+    mockUseRandomQuestions.mockReturnValueOnce({ // Before startTest click
       ...initialMockValues.randomQuestions,
       refetch: vi.fn().mockResolvedValue({ data: null, isError: true, error: new Error(errorMessage) }),
-      isError: true, // This needs to be true after refetch simulation
-      error: new Error(errorMessage),
     });
-
-    renderTestComponent();
-    const nameInput = screen.getByPlaceholderText(i18n.t('testComponent.inputName'));
-    const emailInput = screen.getByPlaceholderText(i18n.t('testComponent.inputEmail'));
+    
+    renderTestComponent(); // Initial render with mocks set for the first call
+    
+    const nameInput = screen.getByLabelText(i18n.t('testComponent.inputName'));
+    const emailInput = screen.getByLabelText(i18n.t('testComponent.inputEmail'));
     const startButton = screen.getByRole('button', { name: i18n.t('test.startTest') });
 
-    await user.type(nameInput, 'John Doe');
+    await user.type(nameInput, 'John Doe'); // Use userEvent for typing
     await user.type(emailInput, 'john@example.com');
+    
+    // After clicking start, the component's internal logic will call refetch.
+    // We need to update the mock that will be used for the re-render *after* startTest's effects.
+    mockUseRandomQuestions.mockReturnValue({ // This mock will be active for re-renders triggered by startTest
+      ...initialMockValues.randomQuestions,
+      isError: true,
+      error: new Error(errorMessage),
+      data: null,
+      isLoading: false,
+      isFetching: false,
+      refetch: vi.fn().mockResolvedValue({ data: null, isError: true, error: new Error(errorMessage) }), // ensure refetch is still there
+    });
+
     await user.click(startButton);
-    
-    // After click, the hook is called, and its state changes. We need to re-render or update based on hook's return
-    // For this test, we simulate the error state directly from the hook after startTest logic
-    // The error message depends on the text in the component for randomQuestionsQuery.isError
-    // Let's assume the error message 'testComponent.errorLoadingQuestions' is used.
-    
-    // Re-render with the error state for questions (simulating the effect of startTest)
-    // This is a bit tricky as startTest itself sets state.
-    // A better way is to check the state *after* the interaction that triggers the error.
-    // The current `startTest` in `TestComponent` calls `randomQuestionsQuery.refetch()`
-    // and then uses `questionsData.isError`.
-
-    // We need to ensure the error from `refetch` is propagated to the `randomQuestionsQuery` mock
-    // For simplicity in this setup, we'll assume the error message appears based on the hook's general error state.
-    // The error message is: {t('testComponent.errorLoadingQuestions')}{' '}{randomQuestionsQuery.error instanceof Error ? randomQuestionsQuery.error.message : String(randomQuestionsQuery.error)}
-
-    // To correctly test this, the `startTest` function would need to be awaited, and the component re-rendered
-    // based on the mocked hook's updated state after `refetch`.
-    // Given the current structure, we'll check for the generic error text.
-    
-    // Let's update the mock to reflect the state *after* the failed refetch attempt in startTest
-    mockUseRandomQuestions.mockReturnValueOnce({ // First render
-        ...initialMockValues.randomQuestions,
-        refetch: vi.fn().mockResolvedValue({ data: null, isError: true, error: new Error(errorMessage) }),
-    });
-    
-    renderTestComponent(); // Initial render
-    await user.click(screen.getByRole('button', { name: i18n.t('test.startTest') }));
-
-    // Now update the mock that would be returned *after* the refetch within startTest
-    mockUseRandomQuestions.mockReturnValue({
-        ...initialMockValues.randomQuestions,
-        isError: true,
-        error: new Error(errorMessage),
-        data: null, // Important: no data on error
-        isLoading: false,
-        isFetching: false,
-    });
-
-    // Re-render or wait for update. Testing Library handles re-renders from state changes.
-    // The error text should appear.
+        
+    // Error message is rendered in a Typography component
     const errorTextElement = await screen.findByText(new RegExp(i18n.t('testComponent.errorLoadingQuestions')));
     expect(errorTextElement).toBeInTheDocument();
+    expect(errorTextElement.tagName).toBe('P'); // MUI Typography often renders as <p>
     expect(screen.getByText(errorMessage)).toBeInTheDocument();
-
   });
 
-  it('Test 4 (Displaying Questions): should render the first question and options', async () => {
+  it('Test 4 (Displaying Questions): should render the first question, options, and LinearProgress', async () => {
     const user = userEvent.setup();
     const sampleQuestions = [
       { id: 1, question: 'First question text?', type: 'CHOICE', options: [{ id: 1, text: 'Option A' }, { id: 2, text: 'Option B' }] },
@@ -185,35 +169,41 @@ describe('TestComponent', () => {
     ];
     initialMockValues.getOrCreateUser.mutateAsync.mockResolvedValue({ id: 1, name: 'Test User', email: 'test@example.com' });
     mockUseGetOrCreateUser.mockReturnValue(initialMockValues.getOrCreateUser);
+    initialMockValues.getOrCreateUser.mutateAsync.mockResolvedValueOnce({ id: 1, name: 'Test User', email: 'test@example.com' });
 
-    // Mock for initial render (before startTest)
-    mockUseRandomQuestions.mockReturnValueOnce({
-        ...initialMockValues.randomQuestions,
-        refetch: vi.fn().mockResolvedValue({ data: sampleQuestions, isError: false, error: null }),
-        data: [], // Initially no questions
+    mockUseRandomQuestions.mockReturnValueOnce({ // Before startTest click
+      ...initialMockValues.randomQuestions,
+      refetch: vi.fn().mockResolvedValue({ data: sampleQuestions, isError: false, error: null }),
+      data: [], 
     });
     
     renderTestComponent();
     const startButton = screen.getByRole('button', { name: i18n.t('test.startTest') });
-    await user.click(startButton);
-
-    // Mock for subsequent renders after questions are fetched
+    
+    // Simulate the state *after* questions are fetched and component re-renders
     mockUseRandomQuestions.mockReturnValue({
-        ...initialMockValues.randomQuestions,
-        data: sampleQuestions, // Questions are now loaded
-        isLoading: false,
-        isFetching: false,
-        isError: false,
+      ...initialMockValues.randomQuestions,
+      data: sampleQuestions,
+      isLoading: false,
+      isFetching: false,
+      isError: false,
+      refetch: vi.fn().mockResolvedValue({ data: sampleQuestions, isError: false, error: null }),
     });
     
-    // The component should re-render due to state changes in startTest and hook updates.
-    // Wait for the question to appear
+    await user.click(startButton); // This should trigger the refetch and subsequent re-render
+    
+    // Check for question text (inside Paper > Typography)
     expect(await screen.findByText(sampleQuestions[0].question)).toBeInTheDocument();
+    
+    // Check for option buttons (MUI Buttons)
     expect(screen.getByRole('button', { name: sampleQuestions[0].options[0].text })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: sampleQuestions[0].options[1].text })).toBeInTheDocument();
 
-    // Check progress bar text
-    expect(screen.getByText(`${i18n.t('testComponent.question')} 1 de ${sampleQuestions.length}`)).toBeInTheDocument();
+    // Check for LinearProgress (by role="progressbar")
+    expect(screen.getByRole('progressbar')).toBeInTheDocument();
+    
+    // Check progress bar text (Typography)
+    expect(screen.getByText(`${i18n.t('testComponent.question')} 1 ${i18n.t('general.of')} ${sampleQuestions.length}`)).toBeInTheDocument();
   });
 });
 
@@ -227,6 +217,7 @@ i18n.addResourceBundle('en', 'translation', {
     "testComponent.errorUserCreate": "Error creating user:",
     "testComponent.errorLoadingQuestions": "Error loading questions:",
     "testComponent.question": "Question",
+    "general.of": "of", // Added "of" for "X of Y"
     "testComponent.yes": "Yes",
     "testComponent.no": "No",
     "general.previous": "Previous",
@@ -252,6 +243,7 @@ i18n.addResourceBundle('es', 'translation', {
     "testComponent.errorUserCreate": "Error creando usuario:",
     "testComponent.errorLoadingQuestions": "Error al cargar las preguntas:",
     "testComponent.question": "Pregunta",
+    "general.of": "de", // Added "of" for "X de Y"
     "testComponent.yes": "Sí",
     "testComponent.no": "No",
     "general.previous": "Anterior",
